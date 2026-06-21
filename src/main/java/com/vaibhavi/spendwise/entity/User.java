@@ -1,6 +1,9 @@
 package com.vaibhavi.spendwise.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -10,10 +13,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
+    
+    @NotBlank(message = "Name cannot be empty")
     private String name;
 
+    @Email(message = "Invalid email")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
 
+    @Size(min = 5, message = "Password must be at least 5 characters")
     private String password;
 
     public User() {
@@ -46,4 +55,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    
 }

@@ -1,8 +1,9 @@
 package com.vaibhavi.spendwise.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import com.vaibhavi.spendwise.entity.User;
 import com.vaibhavi.spendwise.service.UserService;
 
@@ -14,7 +15,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/register")
-    public User registerUser(@RequestBody User user) {
+    public User registerUser(@Valid @RequestBody User user) {
         return userService.registerUser(user);
     }
 
@@ -41,5 +42,15 @@ public class UserController {
                            @RequestBody User updatedUser) {
 
         return userService.updateUser(id, updatedUser);
+    }
+    
+    @GetMapping("/email/{email}")
+    public User getUserByEmail(@PathVariable String email) {
+        return userService.getUserByEmail(email);
+    }
+    
+    @GetMapping("/name/{name}")
+    public List<User> getUsersByName(@PathVariable String name) {
+        return userService.getUsersByName(name);
     }
 }
