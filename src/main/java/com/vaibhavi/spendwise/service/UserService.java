@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.vaibhavi.spendwise.exception.UserNotFoundException;
 import com.vaibhavi.spendwise.entity.User;
 import com.vaibhavi.spendwise.repository.UserRepository;
 
@@ -23,9 +23,11 @@ public class UserService {
     }
     
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElse(null);
+
+        return userRepository.findById(id)
+                .orElseThrow(() ->
+                        new UserNotFoundException("User not found with id " + id));
     }
-    
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
