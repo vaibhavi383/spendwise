@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.service.ExpenseService;
-
+import java.time.LocalDate;
 @RestController
 @RequestMapping("/expenses")
 public class ExpenseController {
@@ -56,5 +56,12 @@ public class ExpenseController {
             @PathVariable String category) {
 
         return expenseService.getExpensesByCategory(category);
+    }
+    
+    @GetMapping("/date/{date}")
+    public List<Expense> getExpensesByDate(
+    		@PathVariable LocalDate date) {
+    	
+        return expenseService.getExpensesByDate(date);
     }
 }

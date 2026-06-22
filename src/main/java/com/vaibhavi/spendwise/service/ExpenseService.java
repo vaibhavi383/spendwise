@@ -1,4 +1,5 @@
 package com.vaibhavi.spendwise.service;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -79,6 +80,10 @@ public class ExpenseService {
     
     public List<Expense> getExpensesByCategory(String category) {
         return expenseRepository.findByCategory(category);
+    }
+    
+    public List<Expense> getExpensesByDate(LocalDate date) {
+        return expenseRepository.findByDate(date);
     }
     
 }
