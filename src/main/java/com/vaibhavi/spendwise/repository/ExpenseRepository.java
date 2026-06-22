@@ -8,4 +8,6 @@ public interface ExpenseRepository
         extends JpaRepository<Expense, Long> {
 	
 	List<Expense> findByUserId(Long userId);
+	
+	List<Expense> findByCategory(String category);
 }

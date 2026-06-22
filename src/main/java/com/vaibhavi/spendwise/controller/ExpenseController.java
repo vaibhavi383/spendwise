@@ -50,4 +50,11 @@ public class ExpenseController {
     public Double getTotalExpenses(@PathVariable Long userId) {
         return expenseService.getTotalExpenses(userId);
     }
+    
+    @GetMapping("/category/{category}")
+    public List<Expense> getExpensesByCategory(
+            @PathVariable String category) {
+
+        return expenseService.getExpensesByCategory(category);
+    }
 }
