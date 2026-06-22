@@ -8,6 +8,7 @@ import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.service.ExpenseService;
 import java.time.LocalDate;
+import java.time.YearMonth;
 @RestController
 @RequestMapping("/expenses")
 public class ExpenseController {
@@ -63,5 +64,14 @@ public class ExpenseController {
     		@PathVariable LocalDate date) {
     	
         return expenseService.getExpensesByDate(date);
+    }
+    
+    @GetMapping("/month/{month}")
+    public List<Expense> getExpensesByMonth(
+    		@PathVariable String month){
+    	YearMonth ym = YearMonth.parse(month);
+    	LocalDate startDate = ym.atDay(1);
+    	LocalDate endDate = ym.atEndOfMonth();
+    	return expenseService.getExpensesByMonth(startDate,endDate);
     }
 }

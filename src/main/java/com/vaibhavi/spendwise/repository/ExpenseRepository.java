@@ -12,4 +12,8 @@ public interface ExpenseRepository
 	List<Expense> findByCategory(String category);
 	
 	List<Expense> findByDate(LocalDate date);
+	
+	List<Expense> findByDateBetween(
+	        LocalDate startDate,
+	        LocalDate endDate);
 }

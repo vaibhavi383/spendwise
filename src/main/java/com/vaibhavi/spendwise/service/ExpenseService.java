@@ -86,4 +86,7 @@ public class ExpenseService {
         return expenseRepository.findByDate(date);
     }
     
+    public List<Expense> getExpensesByMonth(LocalDate startDate,LocalDate endDate) {
+    	return expenseRepository.findByDateBetween(startDate, endDate);
+    }
 }
