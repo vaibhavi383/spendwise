@@ -1,10 +1,12 @@
 package com.vaibhavi.spendwise.entity;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
+import java.util.List;
+import jakarta.persistence.OneToMany;
 @Entity
 @Table(name = "users")
 public class User {
@@ -55,5 +57,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Expense> expenses;
+    //getters and setters
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
 }

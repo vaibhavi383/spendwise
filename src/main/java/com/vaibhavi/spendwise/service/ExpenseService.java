@@ -7,14 +7,31 @@ import org.springframework.stereotype.Service;
 import com.vaibhavi.spendwise.exception.UserNotFoundException;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.repository.ExpenseRepository;
-
+import com.vaibhavi.spendwise.dto.ExpenseRequest;
+import com.vaibhavi.spendwise.entity.User;
+import com.vaibhavi.spendwise.repository.UserRepository;
 @Service
 public class ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
 
-    public Expense addExpense(Expense expense) {
+    public Expense addExpense(ExpenseRequest request) {
+
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() ->
+                        new UserNotFoundException(
+                                "User not found with id " + request.getUserId()));
+
+        Expense expense = new Expense();
+
+        expense.setTitle(request.getTitle());
+        expense.setAmount(request.getAmount());
+        expense.setCategory(request.getCategory());
+        expense.setDate(request.getDate());
+
+        expense.setUser(user);
+
         return expenseRepository.save(expense);
     }
 
@@ -43,4 +60,8 @@ public class ExpenseService {
 
         return expenseRepository.save(expense);
     }
+    @Autowired
+    private UserRepository userRepository;
+    
+    
 }

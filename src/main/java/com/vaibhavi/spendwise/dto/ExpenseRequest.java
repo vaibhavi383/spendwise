@@ -1,33 +1,14 @@
-package com.vaibhavi.spendwise.entity;
+package com.vaibhavi.spendwise.dto;
 
 import java.time.LocalDate;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "expenses")
-public class Expense {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ExpenseRequest {
 
     private String title;
-
     private Double amount;
-
     private String category;
-
     private LocalDate date;
-
-    public Expense() {
-    }
-
-    public Long getId() {
-        return id;
-    }
+    private Long userId;
 
     public String getTitle() {
         return title;
@@ -61,16 +42,11 @@ public class Expense {
         this.date = date;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
-    private User user;
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
-    
 }
