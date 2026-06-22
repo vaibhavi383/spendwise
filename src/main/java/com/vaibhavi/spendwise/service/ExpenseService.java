@@ -89,4 +89,18 @@ public class ExpenseService {
     public List<Expense> getExpensesByMonth(LocalDate startDate,LocalDate endDate) {
     	return expenseRepository.findByDateBetween(startDate, endDate);
     }
+    
+    public Double getTotalExpensesByCategory(
+            String category) {
+    	
+    	List<Expense> expenses=expenseRepository.findByCategory(category);
+
+    	double total = 0.0;
+
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+
+        return total;
+    }
 }

@@ -74,4 +74,13 @@ public class ExpenseController {
     	LocalDate endDate = ym.atEndOfMonth();
     	return expenseService.getExpensesByMonth(startDate,endDate);
     }
+    
+    @GetMapping("/category/{category}/total")
+    public Double getTotalExpensesByCategory(
+            @PathVariable String category) {
+
+        return expenseService
+                .getTotalExpensesByCategory(category);
+    }
+    
 }
