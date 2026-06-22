@@ -45,4 +45,9 @@ public class ExpenseController {
 
         return expenseService.updateExpense(id, expenseDetails);
     }
+    
+    @GetMapping("/user/{userId}/total")
+    public Double getTotalExpenses(@PathVariable Long userId) {
+        return expenseService.getTotalExpenses(userId);
+    }
 }

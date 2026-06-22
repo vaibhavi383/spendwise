@@ -63,5 +63,18 @@ public class ExpenseService {
     @Autowired
     private UserRepository userRepository;
     
+    public Double getTotalExpenses(Long userId) {
+
+        List<Expense> expenses =
+                expenseRepository.findByUserId(userId);
+
+        Double total = 0.0;
+
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+
+        return total;
+    }
     
 }
