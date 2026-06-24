@@ -103,4 +103,37 @@ public class ExpenseService {
 
         return total;
     }
+    
+    public List<Expense> getExpensesByUserAndCategory(
+            Long userId,
+            String category) {
+
+        return expenseRepository.findByUserIdAndCategory(
+                userId,
+                category);
+    }
+    
+    public List<Expense> getExpensesByUserAndDate(
+    		Long userId,
+    		LocalDate date) {
+    	return expenseRepository.findByUserIdAndDate(
+    			userId,
+    			date);
+    }
+    
+    public Double getTotalExpensesByUserIdAndDateBetween(
+            Long userId,
+            LocalDate startDate,
+            LocalDate endDate) {
+    	
+    	List<Expense> expenses=expenseRepository.findByUserIdAndDateBetween(userId,startDate,endDate);
+
+    	double total = 0.0;
+
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+
+        return total;
+    }
 }

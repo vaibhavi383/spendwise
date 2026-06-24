@@ -83,4 +83,36 @@ public class ExpenseController {
                 .getTotalExpensesByCategory(category);
     }
     
+    @GetMapping("/{id}/category/{category}")
+    public List<Expense> getExpensesByUserAndCategory(
+            @PathVariable Long id,
+            @PathVariable String category) {
+
+        return expenseService.getExpensesByUserAndCategory(id,category);
+    }
+    
+    @GetMapping ("/{id}/date/{date}")
+    public List<Expense> getExpensesByUserIdAndDate(
+    		@PathVariable Long id,
+    		@PathVariable LocalDate date) {
+    	
+    	return expenseService.getExpensesByUserAndDate(id,date);
+    }
+    
+    @GetMapping("/{id}/month/{month}/total")
+    public Double getTotalExpensesByUserAndMonth(
+            @PathVariable Long id,
+            @PathVariable String month) {
+
+        YearMonth ym = YearMonth.parse(month);
+
+        LocalDate startDate = ym.atDay(1);
+
+        LocalDate endDate = ym.atEndOfMonth();
+
+        return expenseService.getTotalExpensesByUserIdAndDateBetween(
+                id,
+                startDate,
+                endDate);
+    }
 }
