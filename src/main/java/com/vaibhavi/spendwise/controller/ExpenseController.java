@@ -5,7 +5,7 @@ import org.springframework.data.domain.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import com.vaibhavi.spendwise.dto.DashboardResponse;
 import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import com.vaibhavi.spendwise.entity.Expense;
@@ -21,7 +21,7 @@ public class ExpenseController {
 
     @PostMapping
     public Expense addExpense(
-            @RequestBody ExpenseRequest request) {
+            @Valid @RequestBody ExpenseRequest request) {
 
         return expenseService.addExpense(request);
     }
@@ -150,4 +150,6 @@ public class ExpenseController {
                 pageNumber,
                 pageSize);
     }
+    
+    
 }

@@ -5,7 +5,26 @@ public class DashboardResponse {
     private Double totalExpenses;
     private Integer expenseCount;
 
+    private Double foodExpenses;
+    private Double entertainmentExpenses;
+
     public DashboardResponse() {
+    }
+    
+    public Double getFoodExpenses() {
+        return foodExpenses;
+    }
+
+    public void setFoodExpenses(Double foodExpenses) {
+        this.foodExpenses = foodExpenses;
+    }
+
+    public Double getEntertainmentExpenses() {
+        return entertainmentExpenses;
+    }
+
+    public void setEntertainmentExpenses(Double entertainmentExpenses) {
+        this.entertainmentExpenses = entertainmentExpenses;
     }
 
     public Double getTotalExpenses() {

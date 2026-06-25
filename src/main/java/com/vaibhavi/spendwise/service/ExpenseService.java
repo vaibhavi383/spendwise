@@ -1,7 +1,7 @@
 package com.vaibhavi.spendwise.service;
 import java.time.LocalDate;
 import org.springframework.data.domain.Sort;
-
+import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +12,7 @@ import com.vaibhavi.spendwise.exception.UserNotFoundException;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.repository.ExpenseRepository;
 import com.vaibhavi.spendwise.dto.DashboardResponse;
-import com.vaibhavi.spendwise.dto.ExpenseRequest;
+
 import com.vaibhavi.spendwise.entity.User;
 import com.vaibhavi.spendwise.repository.UserRepository;
 @Service
@@ -147,18 +147,35 @@ public class ExpenseService {
         List<Expense> expenses =
                 expenseRepository.findByUserId(userId);
 
-        Double total = 0.0;
+        double total = 0.0;
+        double foodTotal = 0.0;
+        double entertainmentTotal = 0.0;
 
         for (Expense expense : expenses) {
+
             total += expense.getAmount();
+
+            if ("Food".equalsIgnoreCase(
+                    expense.getCategory())) {
+
+                foodTotal += expense.getAmount();
+            }
+
+            if ("Entertainment".equalsIgnoreCase(
+                    expense.getCategory())) {
+
+                entertainmentTotal += expense.getAmount();
+            }
         }
 
         DashboardResponse response =
                 new DashboardResponse();
 
         response.setTotalExpenses(total);
-
         response.setExpenseCount(expenses.size());
+        response.setFoodExpenses(foodTotal);
+        response.setEntertainmentExpenses(
+                entertainmentTotal);
 
         return response;
     }

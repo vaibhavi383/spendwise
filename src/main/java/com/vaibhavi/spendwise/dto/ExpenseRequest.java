@@ -2,54 +2,71 @@ package com.vaibhavi.spendwise.dto;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class ExpenseRequest {
 
-    private String title;
-    private Double amount;
-    private String category;
-    private LocalDate date;
-    private Long userId;
 
-    public ExpenseRequest() {
-    }
+@NotBlank(message = "Title cannot be empty")
+private String title;
 
-    public String getTitle() {
-        return title;
-    }
+@NotNull(message = "Amount is required")
+@Positive(message = "Amount must be greater than 0")
+private Double amount;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+@NotBlank(message = "Category cannot be empty")
+private String category;
 
-    public Double getAmount() {
-        return amount;
-    }
+@NotNull(message = "Date is required")
+private LocalDate date;
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
+@NotNull(message = "UserId is required")
+private Long userId;
 
-    public String getCategory() {
-        return category;
-    }
+public ExpenseRequest() {
+}
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
+public String getTitle() {
+    return title;
+}
 
-    public LocalDate getDate() {
-        return date;
-    }
+public void setTitle(String title) {
+    this.title = title;
+}
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+public Double getAmount() {
+    return amount;
+}
 
-    public Long getUserId() {
-        return userId;
-    }
+public void setAmount(Double amount) {
+    this.amount = amount;
+}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+public String getCategory() {
+    return category;
+}
+
+public void setCategory(String category) {
+    this.category = category;
+}
+
+public LocalDate getDate() {
+    return date;
+}
+
+public void setDate(LocalDate date) {
+    this.date = date;
+}
+
+public Long getUserId() {
+    return userId;
+}
+
+public void setUserId(Long userId) {
+    this.userId = userId;
+}
+
+
 }
