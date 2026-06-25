@@ -10,6 +10,9 @@ public class ExpenseRequest {
     private LocalDate date;
     private Long userId;
 
+    public ExpenseRequest() {
+    }
+
     public String getTitle() {
         return title;
     }

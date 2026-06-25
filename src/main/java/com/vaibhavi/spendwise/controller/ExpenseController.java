@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.vaibhavi.spendwise.dto.DashboardResponse;
 import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.service.ExpenseService;
@@ -114,5 +116,12 @@ public class ExpenseController {
                 id,
                 startDate,
                 endDate);
+        }
+    	
+    @GetMapping("/dashboard/{id}")
+    public DashboardResponse getDashboard(
+            @PathVariable Long id) {
+
+        return expenseService.getDashboard(id);
     }
 }

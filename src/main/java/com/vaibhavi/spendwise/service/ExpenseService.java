@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.vaibhavi.spendwise.exception.UserNotFoundException;
 import com.vaibhavi.spendwise.entity.Expense;
 import com.vaibhavi.spendwise.repository.ExpenseRepository;
+import com.vaibhavi.spendwise.dto.DashboardResponse;
 import com.vaibhavi.spendwise.dto.ExpenseRequest;
 import com.vaibhavi.spendwise.entity.User;
 import com.vaibhavi.spendwise.repository.UserRepository;
@@ -135,5 +136,27 @@ public class ExpenseService {
         }
 
         return total;
+    }
+    
+    public DashboardResponse getDashboard(
+            Long userId) {
+
+        List<Expense> expenses =
+                expenseRepository.findByUserId(userId);
+
+        Double total = 0.0;
+
+        for (Expense expense : expenses) {
+            total += expense.getAmount();
+        }
+
+        DashboardResponse response =
+                new DashboardResponse();
+
+        response.setTotalExpenses(total);
+
+        response.setExpenseCount(expenses.size());
+
+        return response;
     }
 }
