@@ -29,4 +29,9 @@ public interface ExpenseRepository
 			Long userId,
 			LocalDate startDate,
 			LocalDate endDate);
+	
+	List<Expense> findByTitleContaining(
+	        String title);
+	
+	
 }

@@ -1,8 +1,11 @@
 package com.vaibhavi.spendwise.service;
 import java.time.LocalDate;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.vaibhavi.spendwise.exception.UserNotFoundException;
@@ -158,5 +161,40 @@ public class ExpenseService {
         response.setExpenseCount(expenses.size());
 
         return response;
+    }
+    
+    public List<Expense> searchExpenses(
+            String keyword) {
+
+        return expenseRepository
+                .findByTitleContaining(keyword);
+    }
+    
+    public List<Expense> getExpensesSortedByAmount() {
+
+        return expenseRepository.findAll(
+                Sort.by("amount"));
+    }
+    
+    public List<Expense> getSortedExpenses(
+            String direction) {
+
+        if (direction.equals("asc")) {
+            return expenseRepository.findAll(
+                    Sort.by("amount"));
+        }
+
+        return expenseRepository.findAll(
+                Sort.by("amount").descending());
+    }
+    
+    public Page<Expense> getExpensesPage(
+            int pageNumber,
+            int pageSize) {
+
+        Pageable pageable =
+                PageRequest.of(pageNumber, pageSize);
+
+        return expenseRepository.findAll(pageable);
     }
 }

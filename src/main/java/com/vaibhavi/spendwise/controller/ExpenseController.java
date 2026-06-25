@@ -1,6 +1,7 @@
 package com.vaibhavi.spendwise.controller;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -123,5 +124,30 @@ public class ExpenseController {
             @PathVariable Long id) {
 
         return expenseService.getDashboard(id);
+    }
+    
+    @GetMapping("/search/{keyword}")
+    public List<Expense> searchExpenses(
+            @PathVariable String keyword) {
+
+        return expenseService.searchExpenses(keyword);
+    }
+    
+    @GetMapping("/sort/{direction}")
+    public List<Expense> getSortedExpenses(
+            @PathVariable String direction) {
+
+        return expenseService.getSortedExpenses(
+                direction);
+    }
+    
+    @GetMapping("/page/{pageNumber}/{pageSize}")
+    public Page<Expense> getExpensesPage(
+            @PathVariable int pageNumber,
+            @PathVariable int pageSize) {
+
+        return expenseService.getExpensesPage(
+                pageNumber,
+                pageSize);
     }
 }
