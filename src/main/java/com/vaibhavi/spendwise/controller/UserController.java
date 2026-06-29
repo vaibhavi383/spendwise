@@ -14,10 +14,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/register")
-    public User registerUser(@Valid @RequestBody User user) {
-        return userService.registerUser(user);
-    }
+   
 
     @GetMapping
     public java.util.List<User> getAllUsers() {

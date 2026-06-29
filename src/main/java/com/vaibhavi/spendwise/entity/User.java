@@ -1,5 +1,5 @@
 package com.vaibhavi.spendwise.entity;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.Email;
@@ -20,11 +20,15 @@ public class User {
     @NotBlank(message = "Name cannot be empty")
     private String name;
 
+    @Column(unique = true)
     @Email(message = "Invalid email")
     @NotBlank(message = "Email cannot be empty")
     private String email;
 
     @Size(min = 5, message = "Password must be at least 5 characters")
+    
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     public User() {
